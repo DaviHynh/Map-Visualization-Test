@@ -1,9 +1,9 @@
-body{
+body {
   padding: 0;
   margin: 0;
 }
 
-.contentContainer{
+.contentContainer {
   display: flex;
   background-color: darkslategray;
   width: 100vw;
@@ -12,18 +12,23 @@ body{
   align-items: center;
 }
 
-.mainArea{
-
+.mainArea {
   background-color: darkcyan;
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  gap: 10px;
-  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 90vh;
+  width: 90vh;
+  border-top: .5vh solid;
+  border-left: .5vh solid;
 }
 
-.idk{
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid black;
-  text-align: center;
-  font-size: 30px;
+.mainArea > div {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  background-color: peru;
+  height: 10vh;
+  width: 10vh;
+  border-bottom: .5vh solid;
+  border-right: .5vh solid;
 }
