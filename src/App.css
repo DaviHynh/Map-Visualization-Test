@@ -14,8 +14,9 @@ body {
 
 .mainArea {
   background-color: darkcyan;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
   width: 90vh;
   height: 90vh;
   max-width: 90vmin;
@@ -30,10 +31,8 @@ body {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   background-color: peru;
-  width: 10vh;
-  height: 10vh;
-  max-width: 10vmin;
-  max-height: 10vmin;
+  width: 100%;
+  height: 100%;
 
   border-bottom: .5vmin solid;
   border-right: .5vmin solid;
