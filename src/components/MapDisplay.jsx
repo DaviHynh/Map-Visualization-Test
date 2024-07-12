@@ -2,6 +2,7 @@ import '../App.css'
 import image from '../assets/react.svg'
 
 import { useState, useEffect} from 'react'
+import { motion } from 'framer-motion';
 
 function MapDisplay() {
 
@@ -48,7 +49,8 @@ function MapDisplay() {
     <div className='mainArea'>
 
 
-    <img id="main" src={image}/>
+    {/* <img id="main" src={image}/> */}
+    <motion.img src={image}/>
 
 
     {grid}
