@@ -5,9 +5,9 @@ body {
 
 .contentContainer {
   display: flex;
-  background-color: darkslategray;
   width: 100vw;
   height: 100vh;
+  background-color: darkslategray;
   justify-content: center;
   align-items: center;
 }
@@ -16,12 +16,13 @@ body {
   background-color: darkcyan;
   display: flex;
   flex-wrap: wrap;
-  height: 90vh;
   width: 90vh;
-  min-width: 90vh;
-  max-height: 90vh;
-  border-top: .5vh solid;
-  border-left: .5vh solid;
+  height: 90vh;
+  max-width: 90vmin;
+  max-height: 90vmin;
+
+  border-top: .5vmin solid;
+  border-left: .5vmin solid;
 }
 
 .mainArea > div {
@@ -29,14 +30,19 @@ body {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   background-color: peru;
-  height: 10vh;
   width: 10vh;
-  border-bottom: .5vh solid;
-  border-right: .5vh solid;
+  height: 10vh;
+  max-width: 10vmin;
+  max-height: 10vmin;
+
+  border-bottom: .5vmin solid;
+  border-right: .5vmin solid;
 }
 
 .mainArea > img{
   position: absolute;
-  height: 5vh;
   width: 5vh;
+  height: 5vh;
+  max-width: 5vmin;
+  max-height: 5vmin;
 }
