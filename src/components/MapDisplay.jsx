@@ -1,30 +1,57 @@
 import '../App.css'
+import image from '../assets/react.svg'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect} from 'react'
 
 function MapDisplay() {
+
   const [grid, setGrid] = useState([]);
 
+
+  // Loads the initial grid.
   useEffect(() => {
-    // Generate 9 divs
-    const newDivs = [];
-    for (let i = 0; i < 81; i++) {
-      newDivs.push(<div key={i} className="child-div"></div>);
+    const newGrid = [];
+
+    for (let i = 0; i < 81; i++)
+    {
+      newGrid.push(<div></div>);
     }
-    setGrid(newDivs);
+
+    setGrid(newGrid);
   }, []);
 
-  
 
+  // Listens for key press events.
+  useEffect(() => {
 
+    function somefunction (event)
+    {
+      if (event.key === 'w')
+      {
+        let lol = document.getElementById("main");
 
+        lol.translate(10, 10);
 
+        console.log('press w');
+      }
+    }
+
+    window.addEventListener('keydown', somefunction);
+
+    return () => {
+      window.removeEventListener('keydown', somefunction);
+    }
+  }, [])
 
   return (
     <>
     <div className='mainArea'>
-    {grid}
 
+
+    <img id="main" src={image}/>
+
+
+    {grid}
 
     </div>
     </>
