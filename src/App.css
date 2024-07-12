@@ -18,6 +18,8 @@ body {
   flex-wrap: wrap;
   height: 90vh;
   width: 90vh;
+  min-width: 90vh;
+  max-height: 90vh;
   border-top: .5vh solid;
   border-left: .5vh solid;
 }
@@ -31,4 +33,10 @@ body {
   width: 10vh;
   border-bottom: .5vh solid;
   border-right: .5vh solid;
+}
+
+.mainArea > img{
+  position: absolute;
+  height: 5vh;
+  width: 5vh;
 }
