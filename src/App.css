@@ -54,3 +54,7 @@ body {
   max-width: 5vmin;
   max-height: 5vmin;
 }
+
+.mainArea > div[data-active="true"]{
+  background-color: darkcyan;
+}
