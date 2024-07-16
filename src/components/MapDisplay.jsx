@@ -4,13 +4,12 @@ import image from '../assets/react.svg'
 import { useState, useEffect , useRef} from 'react'
 import { useAnimate } from 'framer-motion';
 
-  // Whenever the window changes, I should update location of image
-  // also add throttling
+  // image location
+  // throttling
 
 function MapDisplay()
 {
-  const [X, setX] = useState(0);
-  const [Y, setY] = useState(0);
+  const [position, setPosition] = useState({playerX: 0, playerY: 0});
   
   const [grid, setGrid] = useState([]);
   const [player, animatePlayer] = useAnimate();
@@ -26,11 +25,11 @@ function MapDisplay()
     {
       if (i == spawnTile)
       {
-        newGrid.push(<div key={i}><img src={image} ref={player}/></div>);
+        newGrid.push(<div key={i} data-active={"true"}>{i}<img src={image} ref={player}/></div>);
       }
       else
       {
-        newGrid.push(<div key={i}></div>);
+        newGrid.push(<div data-active={"false"} key={i}>{i}</div>);
       }
     }
 
@@ -44,26 +43,40 @@ function MapDisplay()
   {
     console.log("Key Input: " + e.key);
 
+    let axis = "";
     let dist = gridRef.current.children[0].getBoundingClientRect().width;
 
     switch (e.key)
     {
       case 'w':
-        setY(Y - dist);
-        animatePlayer(player.current, {y: Y-dist});
+        axis = "y";
+        dist = 0 - dist;
         break;
       case 'a':
-        setX(X - dist);
-        animatePlayer(player.current, {x: X-dist});
+        axis = "x";
+        dist = 0 - dist;
         break;
       case 's':
-        setY(Y + dist);
-        animatePlayer(player.current, {y: Y+dist});
+        axis = "y";
+        dist = 0 + dist;
         break;
       case 'd':
-        setX(X + dist);
-        animatePlayer(player.current, {x: X+dist});
+        axis = "x";
+        dist = 0 + dist;
         break;
+      default:
+        console.log("X: " + position.playerX + " Y: " + position.playerY);
+    }
+
+    if (axis == "x")
+    {
+      setPosition(prevP => ({...prevP, playerX:  prevP.playerX + dist}));
+      animatePlayer((player.current), {x: position.playerX + dist});
+    }
+    else if (axis == "y")
+    {
+      setPosition(prevP => ({...prevP, playerY:  prevP.playerY + dist}));
+      animatePlayer((player.current), {y: position.playerY + dist});
     }
   }
 
