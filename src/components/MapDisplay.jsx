@@ -9,11 +9,13 @@ import { useAnimate } from 'framer-motion';
 
 function MapDisplay()
 {
+  const [timer, setTimer] = useState(new Date().getTime());
+
   const [position, setPosition] = useState({playerX: 0, playerY: 0});
   const [player, animatePlayer] = useAnimate();
   const [active, setActive] = useState(0);
   const gridRef = useRef();
-  const gridSize = 11;
+  const gridSize = 9;
 
   useEffect (() => {
     window.addEventListener('resize', handleResize);
@@ -32,6 +34,11 @@ function MapDisplay()
   const keyPress = (e) =>
   {
     console.log("Key Input: " + e.key);
+
+    if (new Date().getTime() - timer <= 750)
+    {
+      return
+    }
 
     let axis = "";
     let tileChange = 0;
@@ -74,18 +81,20 @@ function MapDisplay()
     if (axis == "x")
     {
       setPosition(prevP => ({...prevP, playerX:  prevP.playerX + dist}));
-      animatePlayer((player.current), {x: position.playerX + dist});
+      animatePlayer((player.current), {x: position.playerX + dist}, {duration: 1.5}, {ease: "linear"});
     }
     else if (axis == "y")
     {
       setPosition(prevP => ({...prevP, playerY:  prevP.playerY + dist}));
-      animatePlayer((player.current), {y: position.playerY + dist});
+      animatePlayer((player.current), {y: position.playerY + dist}, {duration: 1.5}, {ease: "linear"});
     }
 
     // Updates the acive tile.
     gridRef.current.children[active].setAttribute('data-active', 'false');
     gridRef.current.children[active + tileChange].setAttribute('data-active', 'true');
     setActive(active + tileChange);
+
+    setTimer(new Date().getTime());
   }
 
   // Checks for a valid tile move by using mod for x axis and gridSize for y.
@@ -94,11 +103,13 @@ function MapDisplay()
     if (axis == "x" && ((tileNum % gridSize) + dir < 0 || (tileNum % gridSize) + dir >= gridSize))
     {
       console.log("INVALID MOVE!");
+      console.log("Current Tile: " + active);
       return false;
     }
     else if (axis == "y" && (tileNum + dir < 0 || tileNum + dir >= gridSize*gridSize))
     {
       console.log("INVALID");
+      console.log("Current Tile: " + active);
       return false;
     }
 
