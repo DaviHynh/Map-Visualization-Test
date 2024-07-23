@@ -43,7 +43,7 @@ function MapDisplay()
       case 'w':
         axis = "y";
         dist = 0 - dist;
-        tileChange = -9;
+        tileChange = -gridSize;
         break;
       case 'a':
         axis = "x";
@@ -53,7 +53,7 @@ function MapDisplay()
       case 's':
         axis = "y";
         dist = 0 + dist;
-        tileChange = 9;
+        tileChange = gridSize;
         break;
       case 'd':
         axis = "x";
