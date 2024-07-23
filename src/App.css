@@ -16,8 +16,8 @@ body {
 .mainArea {
   background-color: darkcyan;
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(9, 1fr);
+  /* grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr); */
   width: 90vh;
   height: 90vh;
   max-width: 90vmin;
@@ -47,7 +47,7 @@ body {
   outline: .5vmin solid;
 }
 
-.mainArea > div > img{
+.player{
   /* position: absolute; */
   width: 5vh;
   height: 5vh;
@@ -55,6 +55,7 @@ body {
   max-height: 5vmin;
 }
 
-.mainArea > div[data-active="true"]{
+.gridTile[data-active="true"]
+{
   background-color: darkcyan;
 }
