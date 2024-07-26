@@ -1,38 +1,86 @@
-import '../App.css'
-import image from '../assets/react.svg'
-
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useState, useEffect} from 'react'
 
-function Grid({player, setActive, dimension})
-{ 
-  const [grid, setGrid] = useState([]);
+// import GridTile from './GridTile'
+// import Player from './Player';
 
-  // Loads the initial grid.
-  useEffect(() => {
-    const newGrid = [];
-    let spawnTile = Math.floor( (dimension * dimension) / 2);
-  
-    for (let i = 0; i < dimension*dimension; i++)
+function Grid({mapDataProp})
+{
+  const [initRow, setInitRow] = useState(0);
+  const [initCol, setInitCol] = useState(0);
+
+  const [visibleMap, setVisibleMap] = useState([]);
+  const [keysHeld, setKeysHeld] = useState({});
+
+  // Adds the key being held down to the usestate and sets it to true.
+  const handleKeyDown = (e) =>
+  {
+    if(keysHeld[e.key] === true)
     {
-      if (i == spawnTile)
-      {
-        newGrid.push(<div key={i} className="gridTile" data-active={"true"}><img className="player" src={image} ref={player}/></div>);
-      }
-      else
-      {
-        newGrid.push(<div className="gridTile" data-active={"false"} key={i}>{i}</div>);
-      }
+      console.log(e.key + " stil being held.");
+      return;
     }
 
-    console.log("Grid setting...");
-    setGrid(newGrid);
-    setActive(spawnTile);
-  }, [player, setActive, dimension]);
+    setKeysHeld((prev) => ({...prev, [e.key]:true}))
+  }
+
+  // Sets the key that was held down to false.
+  const handleKeyUp = (e) =>
+  {
+    setKeysHeld((prev) => ({...prev, [e.key]:false}))
+  }
+
+  // Used to load the initial grid.
+  useEffect(() => {
+    if (mapDataProp.length === 0)
+    {
+      return;
+    }
+
+    // Splits the entire map into the selected rows.
+    let gotRows = mapDataProp.slice(initRow, initRow + 5);
+
+    let newGrid = [];
+    
+    // Splits the selected rows into the selected columns.
+    gotRows.map((row) => {newGrid.push(row.slice(initCol, initCol + 5))});
+
+    setVisibleMap(newGrid);
+  }, [mapDataProp, initCol, initRow])
+
+  
+  // Handles map movement when the held buttons change.
+  useEffect(() => {
+    if (keysHeld.w)
+    {
+      // Set subtract 1 from Y!.
+      setInitRow(prev => Math.max(prev - 1, 0));
+    }
+
+    if (keysHeld.a)
+    {
+      // Set subtract 1 from Y!.
+      setInitCol(prev => Math.max(prev - 1, 0));
+    }
+
+    if (keysHeld.s)
+    {
+      // Set subtract 1 from Y!.
+      setInitRow(prev => Math.min(prev + 1, 21 - 5));
+    }
+
+    if (keysHeld.d)
+    {
+      // Set subtract 1 from Y!.
+      setInitCol(prev => Math.min(prev + 1, 21 - 5));
+    }
+  }, [keysHeld])
 
   return (
     <>
-    {grid}
+      <div className='gridArea' onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} tabIndex={0}>
+        {visibleMap}
+      </div>
     </>
   )
 }
@@ -40,7 +88,5 @@ function Grid({player, setActive, dimension})
 export default Grid
 
 Grid.propTypes = {
-    player: PropTypes.object.isRequired,
-    setActive: PropTypes.func.isRequired,
-    dimension: PropTypes.number.isRequired
+  mapDataProp: PropTypes.array.isRequired
 }
