@@ -1,17 +1,13 @@
-import MapDisplay from './components/MapDisplay'
+import MainPage from './pages/MainPage'
 import './App.css'
 
 function App() {
 
   return (
     <>
-    <div className='contentContainer'>
-
-
-    <MapDisplay />
-
-
-    </div>
+      <div>
+        <MainPage />
+      </div>
     </>
   )
 }
