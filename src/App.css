@@ -1,35 +1,57 @@
 body {
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  background-color: darkcyan;
 }
 
-.contentContainer {
+.mainPageContianer {
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-color: darkslategray;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
+  overflow-x: hidden;
 }
 
-.mainArea {
-  background-color: darkcyan;
-  display: grid;
-  /* grid-template-columns: repeat(9, 1fr);
-  grid-template-rows: repeat(9, 1fr); */
+.gridArea {
+  background-color: darkolivegreen;
   width: 90vh;
   height: 90vh;
   max-width: 90vmin;
   max-height: 90vmin;
 
-  outline: none;
-
-  /* border-top: .5vmin solid;
-  border-left: .5vmin solid; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
 }
 
-.mainArea > div {
+.gridTile {
+  background-color: peru;
+  outline: .05vh solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+}
+
+.fullMap {
+  background-color: darkolivegreen;
+  width: 90vh;
+  height: 90vh;
+  max-width: 90vmin;
+  max-height: 90vmin;
+
+  display: grid;
+}
+
+img {
+  width: 75%;
+  height: 75%;
+}
+
+
+/* .mainArea > div {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -41,14 +63,14 @@ body {
   align-items: center;
   justify-content: center;
 
-  /* border-bottom: .5vmin solid;
-  border-right: .5vmin solid; */
+  border-bottom: .5vmin solid;
+  border-right: .5vmin solid;
 
   outline: .5vmin solid;
 }
 
 .player{
-  /* position: absolute; */
+  position: absolute;
   width: 5vh;
   height: 5vh;
   max-width: 5vmin;
@@ -58,4 +80,4 @@ body {
 .gridTile[data-active="true"]
 {
   background-color: darkcyan;
-}
+} */
